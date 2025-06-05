@@ -4,11 +4,12 @@ import { getLongUrlFromShortUrl } from "../dao/short_url.js";
 export const createShortUrl = async (req, res, next) => {
   try {
     const data = req.body;
+    // console.log(data);
     let shortUrl;
     if( req.user ) {
-      shortUrl = await createShortUrlWithUser(data.url, req.user._id, data.slug );
+      shortUrl = await createShortUrlWithUser(data.full_url, req.user._id, data.slug );
     } else {
-      shortUrl = await createShortUrlWithoutUser(data.url);
+      shortUrl = await createShortUrlWithoutUser(data.full_url);
     }
     res.status(200).json({ shortUrl: process.env.APP_URL + shortUrl });
   } catch (error) {

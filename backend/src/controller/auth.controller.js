@@ -2,7 +2,7 @@ import { loginUser, registerUser } from "../services/auth.service.js";
 import { cookieOptions } from "../config/config.js";
 
 const register_user = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { name : username, email, password } = req.body;
   const {token, user} = await registerUser(username, email, password);
   req.user = user;
   res.cookie("accessToken", token, cookieOptions);
@@ -18,7 +18,16 @@ const login_user = async (req, res) => {
 };
 
 const logout_user = async (req, res) => {
-  // Logout logic
+  res.clearCookie("accessToken", cookieOptions);
+  req.user = null;
+  res.status(200).json({ message: "logout success" });
 };
 
-export { register_user, login_user, logout_user };
+const get_current_user = (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  res.status(200).json({ user: req.user });
+};
+
+export { register_user, login_user, logout_user, get_current_user };

@@ -27,7 +27,8 @@ export const loginUser = async (email, password) => {
   }
 
   // Check if password matches
-  if ( user.password !== password ) {
+  const isPasswordValid = await user.comparePassword(password);
+  if (!isPasswordValid) {
     throw new ConflictError("Invalid email or password");
   }
 

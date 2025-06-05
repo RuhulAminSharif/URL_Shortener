@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import UrlModel from '../models/short_url.model.js'
 export const findUserByEmail = async (email) => {
   return await User.findOne({ email: email }).select("+password");
 }
@@ -17,4 +18,9 @@ export const deleteUser = async (id) => {
 }
 export const findAllUsers = async () => {
   return await User.find({});
+}
+
+export const getAllUserUrlsDao = async (userId) => {
+  console.log(userId);
+  return await UrlModel.find({ user: userId });
 }
