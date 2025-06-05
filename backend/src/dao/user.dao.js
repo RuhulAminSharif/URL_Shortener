@@ -20,7 +20,8 @@ export const findAllUsers = async () => {
   return await User.find({});
 }
 
-export const getAllUserUrlsDao = async (userId) => {
-  console.log(userId);
-  return await UrlModel.find({ user: userId });
+export const getAllUserUrlsDao = async (id) => {
+  // console.log(id);
+  // console.log(UrlModel.find({ user: id }));
+  return await UrlModel.find({ user: id });
 }

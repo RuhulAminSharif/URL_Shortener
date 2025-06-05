@@ -40,7 +40,7 @@ const UrlForm = () => {
           htmlFor="url"
           className="block text-sm font-medium text-gray-700 mb-1"
         >
-          Enter your URL
+          Your Long URL here
         </label>
         <input
           type="url"
@@ -52,6 +52,24 @@ const UrlForm = () => {
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
+      {isAuthenticated && (
+        <div className="mt-4">
+          <label
+            htmlFor="customSlug"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Customize your short URL (optional)
+          </label>
+          <input
+            type="text"
+            id="customSlug"
+            value={customSlug}
+            onChange={(event) => setCustomSlug(event.target.value)}
+            placeholder="Enter an alias for your short URL"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      )}
       <button
         onClick={handleSubmit}
         type="submit"
@@ -62,24 +80,6 @@ const UrlForm = () => {
       {error && (
         <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
           {error}
-        </div>
-      )}
-      {isAuthenticated && (
-        <div className="mt-4">
-          <label
-            htmlFor="customSlug"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Custom URL (optional)
-          </label>
-          <input
-            type="text"
-            id="customSlug"
-            value={customSlug}
-            onChange={(event) => setCustomSlug(event.target.value)}
-            placeholder="Enter custom slug"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
         </div>
       )}
       {shortUrl && (

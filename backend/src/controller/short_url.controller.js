@@ -31,13 +31,3 @@ export const redirectFromShortUrl = async (req, res) => {
     return res.status(500).send("Server error");
   }
 };
-
-// export const createCustomShortUrl = async (req, res, next) => {
-//   try {
-//     const { url, slug } = req.body;
-//     let shortUrl = await createShortUrlWithoutUser(url, customShortUrl);
-//     res.status(200).json({ shortUrl: process.env.APP_URL + shortUrl });
-//   } catch (error) {
-//     next(error);
-//   }
-// }

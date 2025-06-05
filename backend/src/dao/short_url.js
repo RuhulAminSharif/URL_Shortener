@@ -17,6 +17,13 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
     if (err.code === 11000) {
       throw new ConflictError("Short URL already Exists");
     }
+    
+    if (err.name === "ValidationError") {
+      const errorMessage = Object.values(err.errors)[0].message;
+      // console.log(errorMessage);
+      throw new Error(errorMessage);
+    }
+
     throw new Error(err);
   }
 };
